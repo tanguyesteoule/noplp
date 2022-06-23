@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn instance to serve wiki meter
+After=network.target
+
+[Service]
+User=tanguy
+WorkingDirectory=/home/tanguy/noplp/noplp
+Environment="PATH=/home/tanguy/noplp/noplp/venv/bin"
+ExecStart=/home/tanguy/noplp/noplp/venv/bin/gunicorn --workers 1 -b 0.0.0.0:5000 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
