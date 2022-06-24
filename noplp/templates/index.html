@@ -8,11 +8,25 @@
 <a href="https://github.com/tanguyesteoule/noplp">
     <img src="static/image/GitHub_Logo.png" style="width: 75px; position: absolute; top: 5; right: 10;" />
 </a>
+<a href="/" style="width: 75px; position: absolute; top: 15; left: 20;">Jouer</a>
+<a href="/config" style="width: 75px; position: absolute; top: 15; left: 90;">Configurer</a>
 
 <style>
     input {
         text-align: center;
     }
+
+    /* label focus color */
+    input[type=text]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
+     color: #4527a0 !important;
+    }
+
+    /* label underline focus color */
+    input[type=text]:focus, .materialize-textarea:focus:not([readonly]) {
+     border-bottom: 1px solid #4527a0 !important;
+     box-shadow: 0 1px 0 0 #4527a0 !important;
+    }
+
 </style>
 <script>
 $(document).ready(function() {
@@ -28,11 +42,18 @@ $(document).ready(function() {
             $('#input_'+i).val(WORDS[i])
         }
     });
+
+    $("#refresh").click(function(){
+        window.location.href = "/";
+    });
+
 });
 </script>
 
 <div class="center">
     <h3>N'oubliez pas les paroles !</h3>
+
+    <a id="refresh" class="waves-effect waves-light btn deep-purple darken-3">Refresh</a>
 
     <h5>{{name}}</h5><br />
 
@@ -49,7 +70,7 @@ $(document).ready(function() {
         <input id='input_{{i}}' type="text" style="width:100px;">
     {%endfor%}
 
-    <a id="verify" class="waves-effect waves-light btn">vérifier</a>
+    <a id="verify" class="waves-effect waves-light btn deep-purple darken-3">vérifier</a>
     <br />
 
 
