@@ -30,17 +30,32 @@
 </style>
 <script>
 $(document).ready(function() {
-    $("#verify").click(function(){
-        WORDS = {{answer|tojson}}
-
-        for (let i = 0; i < {{len}}; i++) {
-            if($('#input_'+i).val().toLowerCase() == WORDS[i]) {
-                $('#input_'+i).css({color: 'green'});
-            } else {
-                $('#input_'+i).css({color: 'red'});
-            }
-            $('#input_'+i).val(WORDS[i])
+    ALREADY_CLICK = false
+    $("body").keypress(function(event) {
+        if (event.keyCode === 13) {
+            $("#verify").click();
         }
+    });
+
+    $("#verify").click(function(){
+
+        if(ALREADY_CLICK == false) {
+            ALREADY_CLICK = true
+            WORDS = {{answer|tojson}}
+
+            for (let i = 0; i < {{len}}; i++) {
+                if($('#input_'+i).val().toLowerCase() == WORDS[i]) {
+                    $('#input_'+i).css({color: 'green'});
+                } else {
+                    $('#input_'+i).css({color: 'red'});
+                }
+                $('#input_'+i).val(WORDS[i])
+            }
+
+            $("#refresh").text("Refresh (3 secondes...)");
+            setTimeout(() => {$("#refresh").click();}, 2500);
+        }
+
     });
 
     $("#refresh").click(function(){
